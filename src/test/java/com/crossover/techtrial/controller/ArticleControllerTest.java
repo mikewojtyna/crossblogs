@@ -1,4 +1,4 @@
-package com.crossover.techtrial;
+package com.crossover.techtrial.controller;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,13 +15,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.crossover.techtrial.model.Article;
+import com.crossover.techtrial.repository.ArticleRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class CrossBlogControllerTest {
-	
+public class ArticleControllerTest {
+
 	@Autowired
 	private TestRestTemplate template;
+	
+	@Autowired
+	private ArticleRepository articleRepository;
 	
 	@Before
 	public void setup() throws Exception {
@@ -35,13 +39,14 @@ public class CrossBlogControllerTest {
 		Assert.assertNotNull(resultAsset.getBody().getId());
 	}
 	
-	@Test
-	public void testArticleInvalidEmail() {
-		HttpEntity<Object> article=  getHttpEntity("{\"email\": \"user1\", \"title\": \"hello\" }");
-		ResponseEntity<Article>  resultAsset= template.postForEntity("/articles",article , Article.class);
-		Assert.assertEquals(400, resultAsset.getStatusCodeValue());
-	}
 	
+	@Test
+	public void testArticleShouldBeDeleted() throws Exception {
+		HttpEntity<Object> article=  getHttpEntity("{\"email\": \"user1@gmail.com\", \"title\": \"hello\" }");
+		ResponseEntity<Article>  resultAsset= template.postForEntity("/articles",article , Article.class);
+		template.delete("/articles/"+resultAsset.getBody().getId());
+		
+	}
 	
 	
 	private  HttpEntity<Object> getHttpEntity(Object body)
@@ -50,5 +55,4 @@ public class CrossBlogControllerTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		return  new HttpEntity<Object>(body,headers);	
 	}
-
 }

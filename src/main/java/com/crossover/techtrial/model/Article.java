@@ -8,10 +8,11 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,23 +23,24 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "article")
-public class Article  implements Serializable{
+public class Article  extends BaseEntity  implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5124000706092599751L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter  Long id;
 	
+	@Email
+	@NotNull
 	@Column(name="email")
 	@Getter @Setter String email;
+	
 	
 	@Getter @Setter @Column(name="title")
 	String title;
 	
+	@Size(min=0,max=32768)
 	@Getter @Setter @Column(name="content")
 	String content;
 	
@@ -48,9 +50,5 @@ public class Article  implements Serializable{
 	@Getter @Setter @Column(name="published")
 	Boolean published;
 	
-	@Getter @Setter @Column(name="created_at")
-	LocalDateTime createdAt;
 	
-	@Getter @Setter @Column(name="updated_at")
-	LocalDateTime updatedAt;
 }

@@ -1,6 +1,5 @@
 package com.crossover.techtrial.controller;
 
-import org.junit.Assert;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,7 +54,6 @@ public class ArticleController {
 	@PutMapping(path="articles/{article-id}")
 	public ResponseEntity<Article> updateArticle(@PathVariable("article-id") Long id,@RequestBody Article article)
 	{	
-		Assert.assertNotEquals(id, article.getId());
 		return new ResponseEntity<Article>(articleService.save(article),HttpStatus.OK);
 	}
 	@DeleteMapping(path="articles/{article-id}")

@@ -8,7 +8,7 @@ import com.crossover.techtrial.model.Comment;
 import com.crossover.techtrial.repository.CommentRepository;
 
 @Service
-public class CommentServiceImpl {
+public class CommentServiceImpl implements CommentService{
 
 	@Autowired
 	CommentRepository commentRepository;
@@ -16,7 +16,7 @@ public class CommentServiceImpl {
 	/*
 	 * Returns all the Comments related to article along with Pagination information.
 	 */
-	Page<Comment> findAll(Long articleId, Long pageNumber,Long pageSize){
+	public Page<Comment> findAll(Long articleId, Long pageNumber,Long pageSize){
 		return commentRepository.findByArticleIdOrderByCreatedAt(articleId,PageRequest.of(pageNumber.intValue(), pageSize.intValue()));
 	}
 	

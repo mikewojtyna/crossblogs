@@ -1,8 +1,8 @@
 package com.crossover.techtrial.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.crossover.techtrial.model.Comment;
 import com.crossover.techtrial.repository.CommentRepository;
@@ -16,8 +16,8 @@ public class CommentServiceImpl implements CommentService{
 	/*
 	 * Returns all the Comments related to article along with Pagination information.
 	 */
-	public Page<Comment> findAll(Long articleId, Long pageNumber,Long pageSize){
-		return commentRepository.findByArticleIdOrderByCreatedAt(articleId,PageRequest.of(pageNumber.intValue(), pageSize.intValue()));
+	public List<Comment> findAll(Long articleId){
+		return commentRepository.findByArticleIdOrderByCreatedAt(articleId);
 	}
 	
 	

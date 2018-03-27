@@ -39,17 +39,6 @@ public class ArticleControllerTest {
 		Assert.assertNotNull(resultAsset.getBody().getId());
 	}
 	
-	
-	@Test
-	public void testArticleShouldBeDeleted() throws Exception {
-		HttpEntity<Object> article=  getHttpEntity("{\"email\": \"user1@gmail.com\", \"title\": \"hello\" }");
-		ResponseEntity<Article>  resultAsset= template.postForEntity("/articles",article , Article.class);
-		template.delete("/articles/"+resultAsset.getBody().getId());
-		
-	}
-	
-	
-	
 	private  HttpEntity<Object> getHttpEntity(Object body)
 	{
 		HttpHeaders headers = new HttpHeaders();

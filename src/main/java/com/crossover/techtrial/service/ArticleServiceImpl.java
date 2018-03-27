@@ -1,5 +1,7 @@
 package com.crossover.techtrial.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +16,8 @@ public class ArticleServiceImpl implements ArticleService{
 	ArticleRepository articleRepository;
 	
 	@Override
-	public Page<Article> findAll(Long pageNumber,Long pageSize){
-		return articleRepository.findAll(PageRequest.of(pageNumber.intValue(), pageSize.intValue()));
+	public List<Article> findAll(){
+		return articleRepository.findAll();
 	}
 	
 	@Override
@@ -37,8 +39,8 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public Page<Article> search(String title, Long pageNumber, Long pageSize){
-		return articleRepository.findByTitleContainingIgnoreCase(title,PageRequest.of(pageNumber.intValue(), pageSize.intValue()));
+	public List<Article> search(String title){
+		return articleRepository.findByTitleContainingIgnoreCase(title);
 	}
 	
 	

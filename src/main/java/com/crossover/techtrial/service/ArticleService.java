@@ -1,5 +1,7 @@
 package com.crossover.techtrial.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import com.crossover.techtrial.model.Article;
 /*
@@ -11,7 +13,7 @@ public interface ArticleService {
 	/*
 	 * Returns all the Articles along with Pagination information.
 	 */
-	Page<Article> findAll(Long pageNumber,Long pageSize);
+	List<Article> findAll();
 	
 	/*
 	 * Save the default article.
@@ -35,6 +37,6 @@ public interface ArticleService {
 	/*
 	 * Search Articles Table matching the title and return result with pagination.
 	 */
-	Page<Article> search(String title, Long pageNumber, Long pageSize);
+	List<Article> search(String title);
 	
 }

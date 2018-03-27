@@ -1,6 +1,7 @@
 package com.crossover.techtrial.service;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
+
 import com.crossover.techtrial.model.Comment;
 
 public interface CommentService {
@@ -9,7 +10,7 @@ public interface CommentService {
 	/*
 	 * Returns all the Comments related to article along with Pagination information.
 	 */
-	Page<Comment> findAll(Long articleId, Long pageNumber,Long pageSize);
+	List<Comment> findAll(Long articleId);
 	
 	/*
 	 * Save the default article.

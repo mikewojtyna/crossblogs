@@ -27,15 +27,9 @@ public class ArticleController {
 	@PostMapping(path="articles")
 	public ResponseEntity<Article> createArticle(@RequestBody Article article)
 	{
-		return new ResponseEntity<Article>(articleService.save(article),HttpStatus.CREATED);
-		
+		return new ResponseEntity<Article>(articleService.save(article),HttpStatus.CREATED);	
 	}
 	
-	@GetMapping(path="articles")
-	public ResponseEntity<List<Article>> getArticles()
-	{
-		return new ResponseEntity<List<Article>>(articleService.findAll(),HttpStatus.OK);
-	}
 	@GetMapping(path="articles/{article-id}")
 	public ResponseEntity<Article> getArticleById(@PathVariable("article-id") Long id)
 	{
@@ -58,9 +52,9 @@ public class ArticleController {
 	}
 
 	@GetMapping(path="articles/search")
-	public ResponseEntity<List<Article>> searchArticles(@RequestParam(value="title")String title,@RequestParam(value="pageNumber")Long pageNumber,@RequestParam(value="pageSize")Long pageSize)
+	public ResponseEntity<List<Article>> searchArticles(@RequestParam(value="text")String text)
 	{
-		return new ResponseEntity<List<Article>>(articleService.search(title),HttpStatus.OK);
+		return new ResponseEntity<List<Article>>(articleService.search(text),HttpStatus.OK);
 	}
 
 }

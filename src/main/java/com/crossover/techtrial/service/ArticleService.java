@@ -10,11 +10,6 @@ import com.crossover.techtrial.model.Article;
  */
 public interface ArticleService {
 	/*
-	 * Returns all the Articles along with Pagination information.
-	 */
-	List<Article> findAll();
-	
-	/*
 	 * Save the default article.
 	 */
 	default Article save(Article article)

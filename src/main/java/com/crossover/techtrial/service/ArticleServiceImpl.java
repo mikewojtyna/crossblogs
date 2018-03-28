@@ -14,21 +14,15 @@ public class ArticleServiceImpl implements ArticleService{
 	ArticleRepository articleRepository;
 	
 	@Override
-	public List<Article> findAll(){
-		return articleRepository.findAll();
-	}
-	
-	@Override
 	public Article save (Article article)
 	{
-		
 		return articleRepository.save(article);
 	}
 	
 	@Override
 	public Article findById(Long id)
 	{
-		return articleRepository.findById(id).get();
+		return articleRepository.findById(id).orElse(null);
 	}
 	
 	@Override
@@ -37,8 +31,8 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public List<Article> search(String title){
-		return articleRepository.findByTitleContainingIgnoreCase(title);
+	public List<Article> search(String search){
+		return articleRepository.findByTitleOrContent(search);
 	}
 	
 	

@@ -36,7 +36,6 @@ public class Article  extends BaseEntity  implements Serializable{
 	@Column(name="email")
 	@Getter @Setter String email;
 	
-	
 	@Getter @Setter @Column(name="title")
 	String title;
 	

@@ -3,27 +3,18 @@ version: '3.3'
 services:
   api:
     image: crossblogs
-    ports:
-      - 8080:8080
-    container_name: api
     environment:
       MYSQL_HOST: db
+    ports:
+      - 8080:8080
     depends_on:
       - db
-    networks:
-      - crossblog-network
-
   db:
-    image: mysql
-    ports:
-      - 3307:3306
+    image: mysql:5.7.20
     environment:
-      MYSQL_ROOT_PASSWORD: mysql!23
-      MYSQL_DATABASE: crossblogs
-
-    networks:
-      - crossblog-network
-
-networks:
-  crossblog-network:
-    driver: bridge
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=mysql123
+      - MYSQL_DATABASE=crossblogs
+    ports:
+      - 3306:3306
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8 --explicit_defaults_for_timestamp

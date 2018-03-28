@@ -25,7 +25,4 @@
             <column name="updated_at" type="datetime"/>
         </createTable>
     </changeSet>
-    <changeSet author="crossover" id="1484386901782-33">
-        <addForeignKeyConstraint baseColumnNames="article_id" baseTableName="comment" constraintName="fk_comment_article" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="article"/>
-    </changeSet>
 </databaseChangeLog>

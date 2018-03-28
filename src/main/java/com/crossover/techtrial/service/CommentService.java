@@ -15,9 +15,7 @@ public interface CommentService {
 	/*
 	 * Save the default article.
 	 */
-	default Comment save(Comment comment)
-	{
-		return null;
-	}
+	 Comment save(Comment comment);
+
 
 }

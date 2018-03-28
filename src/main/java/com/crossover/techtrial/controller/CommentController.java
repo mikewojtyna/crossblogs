@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.crossover.techtrial.model.Comment;
+import com.crossover.techtrial.service.ArticleService;
 import com.crossover.techtrial.service.CommentService;
 
 @RestController
@@ -20,14 +20,17 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	@Autowired
+	ArticleService articleService;
+	
 	@PostMapping(path="articles/{article-id}/comments")
 	public ResponseEntity<Comment> createComment(@PathVariable(value="article-id")Long articleId, @RequestBody Comment comment)
 	{
-		comment.setArticleId(articleId); 
+		comment.setArticle(articleService.findById(articleId));
 		return new ResponseEntity<Comment>(commentService.save(comment),HttpStatus.CREATED);
 	}
 	@GetMapping(path="articles/{article-id}/comments")
-	public ResponseEntity<List<Comment>> getComments(@PathVariable("article-id") Long articleId, @RequestParam(value="pageNumber") Long pageNumber, @RequestParam(value="pageSize")Long pageSize)
+	public ResponseEntity<List<Comment>> getComments(@PathVariable("article-id") Long articleId)
 	{
 		return new ResponseEntity<List<Comment>>(commentService.findAll(articleId),HttpStatus.OK);	
 	}

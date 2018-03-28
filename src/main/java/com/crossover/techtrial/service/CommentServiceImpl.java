@@ -20,7 +20,6 @@ public class CommentServiceImpl implements CommentService{
 		return commentRepository.findByArticleIdOrderByCreatedAt(articleId);
 	}
 	
-	
 	/*
 	 * Save the default article.
 	 */

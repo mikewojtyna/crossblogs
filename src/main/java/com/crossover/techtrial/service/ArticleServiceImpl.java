@@ -3,8 +3,6 @@ package com.crossover.techtrial.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.repository.ArticleRepository;

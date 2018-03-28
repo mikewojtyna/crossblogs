@@ -2,7 +2,6 @@ package com.crossover.techtrial.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import com.crossover.techtrial.model.Article;
 /*
  * This interface provides all methods to access the functionality. See ArticleServiceImpl for implementation.

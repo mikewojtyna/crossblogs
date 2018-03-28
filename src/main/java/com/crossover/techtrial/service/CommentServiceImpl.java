@@ -17,7 +17,7 @@ public class CommentServiceImpl implements CommentService{
 	 * Returns all the Comments related to article along with Pagination information.
 	 */
 	public List<Comment> findAll(Long articleId){
-		return commentRepository.findByArticleIdOrderByCreatedAt(articleId);
+		return commentRepository.findAll();
 	}
 	
 	/*

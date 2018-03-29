@@ -21,9 +21,8 @@ Prerequisites:
 	Any IDE
 	Docker [Latest Version]
 	Java 8 
-	MySQL >= [Latest Version]
-	Gradle 
-	Lombok ( https://projectlombok.org/setup/overview )
+	MySQL >= [Latest Version] 
+	Lombok Configured in IDE ( https://projectlombok.org/setup/overview )
 
 How to Run:
 1) In order to run application in local environment. Set the environment variables as defined in application.properties.

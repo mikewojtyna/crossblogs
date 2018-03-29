@@ -1,23 +1,14 @@
-version: '3.3'
+version: '2'
 
 services:
-  api:
+  crossblogs-app:
     image: crossblogs
-    environment:
-      MYSQL_HOST: db
-      MYSQL_PORT: 3306
-      MYSQL_USER: root
-      MYSQL_PASSWORD: mysql123
     ports:
       - 8080:8080
     depends_on:
-      - db
-  db:
-    image: mysql
-    environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: mysql123
-      MYSQL_DATABASE: crossblogs
-    ports:
-      - 3306:3306
-    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8 --explicit_defaults_for_timestamp
+      - crossblogs-mysql
+
+  crossblogs-mysql:
+    extends:
+        file: mysql.yml
+        service: crossblogs-mysql

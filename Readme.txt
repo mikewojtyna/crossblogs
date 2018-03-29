@@ -33,7 +33,7 @@ How to Run:
    >  ./gradlew clean bootRun
    
 1) Use following command to create docker image
-	/gradlew clean bootJar buildDocker
+	./gradlew clean bootJar buildDocker
 
 2) Following command will start the DB Service as well as cross-blogs application
    docker-compose up -d

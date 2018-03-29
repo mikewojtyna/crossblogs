@@ -37,8 +37,8 @@ public abstract class BaseEntity {
 	}
 
 	@PrePersist
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedAt() {
+		this.createdAt = LocalDateTime.now();
 	}
 
 	public LocalDateTime getUpdatedAt() {
@@ -46,8 +46,8 @@ public abstract class BaseEntity {
 	}
 
 	@PreUpdate
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setUpdatedAt() {
+		this.updatedAt = LocalDateTime.now();
 	}
 
 	@Override

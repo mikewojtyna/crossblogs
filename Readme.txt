@@ -26,7 +26,7 @@ Prerequisites:
 
 How to Run:
 1) In order to run application in local environment. Set the environment variables as defined in application.properties.
-   Use following command to set environment variable o local environment.
+   Use following command to set environment variable in your local environment.
    >  Create database name cross-blogs in your Database server.(You can use the mysql docker container as well)
    >  export MYSQL_HOST=127.0.0.1,MYSQL_PORT=3306,MYSQL_USER=root,MYSQL_PASSWORD=mysql123
    >  ./gradlew clean bootRun

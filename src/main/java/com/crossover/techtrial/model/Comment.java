@@ -13,11 +13,13 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="comment")
+@EqualsAndHashCode(callSuper=true)
 public class Comment extends BaseEntity implements Serializable{
 	
 	

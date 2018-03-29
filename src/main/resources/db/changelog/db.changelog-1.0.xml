@@ -25,4 +25,11 @@
             <column name="updated_at" type="datetime"/>
         </createTable>
     </changeSet>
+    <changeSet author="java" id="insert_article">
+		<insert tableName="article">
+			<column name="email">john@publisher.com</column>
+			<column name="title">How to boil an egg</column>
+			<column name="content">Get a bowl and heat the water to reach boiling point. Put chicken egg for approximately 10 minutes.</column>
+		</insert>
+	</changeSet>
 </databaseChangeLog>

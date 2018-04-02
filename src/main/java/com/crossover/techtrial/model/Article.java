@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -19,13 +22,16 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "article")
-public class Article  extends BaseEntity  implements Serializable{
+public class Article  implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5124000706092599751L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
 	
 	@Email
 	@NotNull
@@ -44,6 +50,14 @@ public class Article  extends BaseEntity  implements Serializable{
 	
 	@Column(name="published")
 	Boolean published;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getEmail() {
 		return email;
@@ -85,46 +99,44 @@ public class Article  extends BaseEntity  implements Serializable{
 		this.published = published;
 	}
 
+	/*
+	 * As per business requirements id,email and title are sufficient to uniquely identify an entry.
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((published == null) ? 0 : published.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
 
+	/*
+	 * As per business requirements id,email and title are sufficient to uniquely identify an entry.
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Article other = (Article) obj;
-		if (content == null) {
-			if (other.content != null)
-				return false;
-		} else if (!content.equals(other.content))
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (published == null) {
-			if (other.published != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!published.equals(other.published))
+		} else if (!id.equals(other.id))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -133,7 +145,6 @@ public class Article  extends BaseEntity  implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 	
 	

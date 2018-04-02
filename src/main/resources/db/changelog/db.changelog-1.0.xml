@@ -10,8 +10,6 @@
             <column name="content" type="LONGTEXT"/>
             <column name="date" type="datetime"/>
             <column name="published" type="BIT"/>
-            <column name="created_at" type="datetime"/>
-            <column name="updated_at" type="datetime"/>
         </createTable>
         <createTable tableName="comment">
             <column autoIncrement="true" name="id" type="BIGINT">
@@ -21,8 +19,6 @@
             <column name="email" type="VARCHAR(255)"/>
             <column name="message" type="LONGTEXT"/>
             <column name="date" type="datetime"/>
-            <column name="created_at" type="datetime"/>
-            <column name="updated_at" type="datetime"/>
         </createTable>
     </changeSet>
     <changeSet author="java" id="insert_article">

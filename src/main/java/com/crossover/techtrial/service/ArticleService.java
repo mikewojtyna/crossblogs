@@ -6,16 +6,13 @@ import com.crossover.techtrial.model.Article;
 /*
  * This interface provides all methods to access the functionality. See ArticleServiceImpl for implementation.
  * 
- * @author Khurram
+ * @author crossover
  */
 public interface ArticleService {
 	/*
 	 * Save the default article.
 	 */
-	default Article save(Article article)
-	{
-		return null;
-	}
+	 Article save(Article article);
 	
 	/*
 	 * FindById will find the specific user form list.

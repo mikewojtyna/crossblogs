@@ -9,9 +9,6 @@ import com.crossover.techtrial.model.Comment;
 
 @RepositoryRestResource(exported=false)
 public interface CommentRepository extends PagingAndSortingRepository<Comment,Long> {
-	
-	@Override
 	List<Comment> findAll();
-	
-	List<Comment> findByArticleIdOrderByCreatedAt(Long articleId);
+	List<Comment> findByArticleIdOrderByDate(Long articleId);
 }

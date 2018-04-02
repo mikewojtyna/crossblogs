@@ -33,7 +33,7 @@ apply plugin: 'com.github.ksoichiro.console.reporter'
 defaultTasks 'bootRun'
 
 group = 'com.crossover.techtrial'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 sourceCompatibility = 1.8
 

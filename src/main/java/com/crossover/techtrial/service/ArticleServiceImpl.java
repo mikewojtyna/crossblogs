@@ -32,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService{
 	
 	@Override
 	public List<Article> search(String search){
-		return articleRepository.findByTitleOrContent(search);
+		return articleRepository.findTop10ByTitleOrContent(search);
 	}
 	
 	

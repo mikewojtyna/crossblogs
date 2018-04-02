@@ -51,6 +51,9 @@ public class ArticleController {
 		return new ResponseEntity<Article>(HttpStatus.OK);
 	}
 
+	/*
+	 * Search endpoint is used in autocomplete and return only top 10 results. Therefore no need for pagination.
+	 */
 	@GetMapping(path="articles/search")
 	public ResponseEntity<List<Article>> searchArticles(@RequestParam(value="text")String text)
 	{

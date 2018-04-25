@@ -42,12 +42,9 @@ public class ArticleController
 	public ResponseEntity<Article> getArticleById(
 		@PathVariable("article-id") Long id)
 	{
-		Article article = articleService.findById(id);
-		if (article != null)
-		{
-			return new ResponseEntity<>(article, HttpStatus.OK);
-		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return articleService.findById(id).map(
+			article -> new ResponseEntity(article, HttpStatus.OK))
+			.orElse(new ResponseEntity<>(HttpStatus.OK));
 	}
 
 	/*

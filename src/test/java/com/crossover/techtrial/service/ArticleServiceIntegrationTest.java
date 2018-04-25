@@ -5,6 +5,7 @@ package com.crossover.techtrial.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
+import java.util.Optional;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +49,7 @@ public class ArticleServiceIntegrationTest
 		// then
 		assertThat(savedArticle.getEmail())
 			.isEqualTo(givenArticle.getEmail());
-		assertThat(findArticle(savedArticle.getId()))
+		assertThat(findArticle(savedArticle.getId()).get())
 			.isEqualTo(savedArticle);
 	}
 
@@ -62,7 +63,14 @@ public class ArticleServiceIntegrationTest
 		articleService.delete(article.getId());
 
 		// then
-		assertThat(findArticle(article.getId())).isNull();
+		assertThat(findArticle(article.getId())).isNotPresent();
+	}
+
+	@Test
+	public void should_ReturnEmptyOptional_When_FindArticleThatDoesntExist()
+		throws Exception
+	{
+		assertThat(articleService.findById(-1L)).isEmpty();
 	}
 
 	@Test
@@ -155,7 +163,7 @@ public class ArticleServiceIntegrationTest
 	 * @param id
 	 * @return
 	 */
-	private Article findArticle(Long id)
+	private Optional<Article> findArticle(Long id)
 	{
 		return articleService.findById(id);
 	}

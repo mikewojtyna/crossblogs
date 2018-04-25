@@ -1,6 +1,7 @@
 package com.crossover.techtrial.service;
 
 import java.util.List;
+import java.util.Optional;
 import com.crossover.techtrial.model.Article;
 
 /*
@@ -19,7 +20,7 @@ public interface ArticleService
 	 * FindById will find the specific user form list.
 	 *
 	 */
-	Article findById(Long id);
+	Optional<Article> findById(Long id);
 
 	/*
 	 * Save the default article.

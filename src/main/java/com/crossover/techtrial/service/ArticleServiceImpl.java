@@ -1,6 +1,7 @@
 package com.crossover.techtrial.service;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.crossover.techtrial.model.Article;
@@ -20,9 +21,9 @@ public class ArticleServiceImpl implements ArticleService
 	}
 
 	@Override
-	public Article findById(Long id)
+	public Optional<Article> findById(Long id)
 	{
-		return articleRepository.findById(id).orElse(null);
+		return articleRepository.findById(id);
 	}
 
 	@Override

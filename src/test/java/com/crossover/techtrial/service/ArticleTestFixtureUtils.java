@@ -17,4 +17,15 @@ public class ArticleTestFixtureUtils
 		article.setEmail("test@email.com");
 		return article;
 	}
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	public static Article articleWithEmail(String email)
+	{
+		Article article = anyArticle();
+		article.setEmail(email);
+		return article;
+	}
 }

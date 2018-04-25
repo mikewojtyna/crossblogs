@@ -44,7 +44,7 @@ public class ArticleController
 	{
 		return articleService.findById(id).map(
 			article -> new ResponseEntity(article, HttpStatus.OK))
-			.orElse(new ResponseEntity<>(HttpStatus.OK));
+			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 	/*

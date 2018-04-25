@@ -8,25 +8,23 @@ import com.crossover.techtrial.model.Comment;
 import com.crossover.techtrial.repository.CommentRepository;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
-	@Autowired
-	CommentRepository commentRepository;
-	
-	/*
-	 * Returns all the Comments related to article along with Pagination information.
-	 */
-	public List<Comment> findAll(Long articleId){
-		return commentRepository.findAll();
-	}
-	
-	/*
-	 * Save the default article.
-	 */
-	public Comment save(Comment comment)
-	{
-		return commentRepository.save(comment);
-	}
+  @Autowired
+  CommentRepository commentRepository;
 
+  /*
+   * Returns all the Comments related to article along with Pagination information.
+   */
+  public List<Comment> findAll(Long articleId) {
+    return commentRepository.findAll();
+  }
+
+  /*
+   * Save the default article.
+   */
+  public Comment save(Comment comment) {
+    return commentRepository.save(comment);
+  }
 
 }

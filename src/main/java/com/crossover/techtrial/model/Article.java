@@ -22,130 +22,130 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "article")
-public class Article  implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5124000706092599751L;
+public class Article implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	
-	@Email
-	@NotNull
-	@Column(name="email")
-	String email;
-	
-	@Column(name="title")
-	String title;
-	
-	@Size(min=0,max=32768)
-	@Column(name="content")
-	String content;
-	
-	@Column(name="date")
-	LocalDateTime date;
-	
-	@Column(name="published")
-	Boolean published;
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 5124000706092599751L;
 
-	public Long getId() {
-		return id;
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @Email
+  @NotNull
+  @Column(name = "email")
+  String email;
 
-	public String getEmail() {
-		return email;
-	}
+  @Column(name = "title")
+  String title;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  @Size(min = 0, max = 32768)
+  @Column(name = "content")
+  String content;
 
-	public String getTitle() {
-		return title;
-	}
+  @Column(name = "date")
+  LocalDateTime date;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  @Column(name = "published")
+  Boolean published;
 
-	public String getContent() {
-		return content;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public LocalDateTime getDate() {
-		return date;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public Boolean getPublished() {
-		return published;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public void setPublished(Boolean published) {
-		this.published = published;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	/*
-	 * As per business requirements id,email and title are sufficient to uniquely identify an entry.
-	 * (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
+  public String getContent() {
+    return content;
+  }
 
-	/*
-	 * As per business requirements id,email and title are sufficient to uniquely identify an entry.
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Article other = (Article) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
-	
-	
-	
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public LocalDateTime getDate() {
+    return date;
+  }
+
+  public void setDate(LocalDateTime date) {
+    this.date = date;
+  }
+
+  public Boolean getPublished() {
+    return published;
+  }
+
+  public void setPublished(Boolean published) {
+    this.published = published;
+  }
+
+  /*
+   * As per business requirements id,email and title are sufficient to uniquely identify an entry.
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((email == null) ? 0 : email.hashCode());
+    result = prime * result + ((id == null) ? 0 : id.hashCode());
+    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    return result;
+  }
+
+  /*
+   * As per business requirements id,email and title are sufficient to uniquely identify an entry.
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Article other = (Article) obj;
+    if (email == null) {
+      if (other.email != null)
+        return false;
+    } else if (!email.equals(other.email))
+      return false;
+    if (id == null) {
+      if (other.id != null)
+        return false;
+    } else if (!id.equals(other.id))
+      return false;
+    if (title == null) {
+      if (other.title != null)
+        return false;
+    } else if (!title.equals(other.title))
+      return false;
+    return true;
+  }
+
 }

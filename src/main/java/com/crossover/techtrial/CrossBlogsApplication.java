@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableAutoConfiguration
 public class CrossBlogsApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(CrossBlogsApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(CrossBlogsApplication.class, args);
+  }
 }

@@ -17,47 +17,44 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.service.ArticleService;
 
-
 @RestController
 public class ArticleController {
-	
-	@Autowired
-	ArticleService articleService; 
-	
-	@PostMapping(path="articles")
-	public ResponseEntity<Article> createArticle(@RequestBody Article article)
-	{
-		return new ResponseEntity<Article>(articleService.save(article),HttpStatus.CREATED);	
-	}
-	
-	@GetMapping(path="articles/{article-id}")
-	public ResponseEntity<Article> getArticleById(@PathVariable("article-id") Long id)
-	{
-		Article article = articleService.findById(id);
-		if (article!=null)
-			return new  ResponseEntity<Article>(article,HttpStatus.OK);
-		return new ResponseEntity<Article>(HttpStatus.NOT_FOUND);
-	}
-	
-	@PutMapping(path="articles/{article-id}")
-	public ResponseEntity<Article> updateArticle(@PathVariable("article-id") Long id,@RequestBody Article article)
-	{	
-		return new ResponseEntity<Article>(articleService.save(article),HttpStatus.OK);
-	}
-	@DeleteMapping(path="articles/{article-id}")
-	public ResponseEntity<Article> deleteArticleById(@PathVariable("article-id") Long id)
-	{
-		articleService.delete(id);;
-		return new ResponseEntity<Article>(HttpStatus.OK);
-	}
 
-	/*
-	 * Search endpoint is used in autocomplete and return only top 10 results. Therefore no need for pagination.
-	 */
-	@GetMapping(path="articles/search")
-	public ResponseEntity<List<Article>> searchArticles(@RequestParam(value="text")String text)
-	{
-		return new ResponseEntity<List<Article>>(articleService.search(text),HttpStatus.OK);
-	}
+  @Autowired
+  ArticleService articleService;
+
+  @PostMapping(path = "articles")
+  public ResponseEntity<Article> createArticle(@RequestBody Article article) {
+    return new ResponseEntity<>(articleService.save(article), HttpStatus.CREATED);
+  }
+
+  @GetMapping(path = "articles/{article-id}")
+  public ResponseEntity<Article> getArticleById(@PathVariable("article-id") Long id) {
+    Article article = articleService.findById(id);
+    if (article != null)
+      return new ResponseEntity<>(article, HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+  @PutMapping(path = "articles/{article-id}")
+  public ResponseEntity<Article> updateArticle(@PathVariable("article-id") Long id,
+      @RequestBody Article article) {
+    return new ResponseEntity<>(articleService.save(article), HttpStatus.OK);
+  }
+
+  @DeleteMapping(path = "articles/{article-id}")
+  public ResponseEntity<Article> deleteArticleById(@PathVariable("article-id") Long id) {
+    articleService.delete(id);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  /*
+   * Search endpoint is used in autocomplete and return only top 10 results. Therefore no need for
+   * pagination.
+   */
+  @GetMapping(path = "articles/search")
+  public ResponseEntity<List<Article>> searchArticles(@RequestParam(value = "text") String text) {
+    return new ResponseEntity<>(articleService.search(text), HttpStatus.OK);
+  }
 
 }

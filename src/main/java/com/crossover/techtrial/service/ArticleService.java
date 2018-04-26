@@ -32,4 +32,16 @@ public interface ArticleService
 	 */
 	List<Article> search(String title);
 
+	/**
+	 * Updates existing article entity.
+	 *
+	 * @param id
+	 *                article id
+	 * @param article
+	 *                new article (all properties except id will be copied)
+	 * @return {@code true} if article was updated successfully,
+	 *         {@code false} when article doesn't exist
+	 */
+	boolean update(Long id, Article article);
+
 }

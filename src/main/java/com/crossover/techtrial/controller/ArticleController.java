@@ -60,12 +60,16 @@ public class ArticleController
 	}
 
 	@PutMapping(path = "articles/{article-id}")
-	public ResponseEntity<Article> updateArticle(
+	public ResponseEntity<Void> updateArticle(
 		@PathVariable("article-id") Long id,
 		@RequestBody Article article)
 	{
-		return new ResponseEntity<>(articleService.save(article),
-			HttpStatus.OK);
+		boolean articleUpdated = articleService.update(id, article);
+		if (articleUpdated)
+		{
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 }

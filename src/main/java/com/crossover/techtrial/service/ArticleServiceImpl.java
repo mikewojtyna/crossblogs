@@ -40,4 +40,13 @@ public class ArticleServiceImpl implements ArticleService
 				search, search);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.crossover.techtrial.service.ArticleService#update(java.lang.Long, com.crossover.techtrial.model.Article)
+	 */
+	@Override
+	public boolean update(Long id, Article article)
+	{
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
+
 }

@@ -9,7 +9,7 @@ import com.crossover.techtrial.model.Article;
  * @author goobar
  *
  */
-public class ArticleTestFixtureUtils
+public class ArticleFixtureUtils
 {
 	public static Article anyArticle()
 	{

@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.service.ArticleService;
-import com.crossover.techtrial.service.ArticleTestFixtureUtils;
+import com.crossover.techtrial.service.ArticleFixtureUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -42,8 +42,8 @@ public class ArticleControllerTest
 	public void should_CreateArticle() throws Exception
 	{
 		// given
-		Article createdArticle = ArticleTestFixtureUtils.anyArticle();
-		when(articleService.save(ArticleTestFixtureUtils
+		Article createdArticle = ArticleFixtureUtils.anyArticle();
+		when(articleService.save(ArticleFixtureUtils
 			.articleWithEmail("user1@gmail.com")))
 				.thenReturn(createdArticle);
 		HttpEntity<Object> articleRequest = getHttpEntity(
@@ -82,7 +82,7 @@ public class ArticleControllerTest
 	{
 		// given
 		Long id = anyId();
-		Article article = ArticleTestFixtureUtils.anyArticle();
+		Article article = ArticleFixtureUtils.anyArticle();
 		when(articleService.findById(id))
 			.thenReturn(Optional.of(article));
 
@@ -122,7 +122,7 @@ public class ArticleControllerTest
 	{
 		// given
 		Long id = anyId();
-		Article updatedArticle = ArticleTestFixtureUtils
+		Article updatedArticle = ArticleFixtureUtils
 			.articleWithEmail("user1@gmail.com");
 		when(articleService.update(id, updatedArticle))
 			.thenReturn(false);
@@ -144,7 +144,7 @@ public class ArticleControllerTest
 	{
 		// given
 		String title = anyTitle();
-		Article matchingArticle = ArticleTestFixtureUtils.anyArticle();
+		Article matchingArticle = ArticleFixtureUtils.anyArticle();
 		when(articleService.search(title))
 			.thenReturn(Arrays.asList(matchingArticle));
 
@@ -168,7 +168,7 @@ public class ArticleControllerTest
 	{
 		// given
 		Long id = anyId();
-		Article updatedArticle = ArticleTestFixtureUtils
+		Article updatedArticle = ArticleFixtureUtils
 			.articleWithEmail("user1@gmail.com");
 		when(articleService.update(id, updatedArticle))
 			.thenReturn(true);

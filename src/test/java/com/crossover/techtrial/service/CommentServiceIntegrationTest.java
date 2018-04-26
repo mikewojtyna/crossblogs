@@ -140,7 +140,7 @@ public class CommentServiceIntegrationTest
 	private Article createNewArticle()
 	{
 		return articleService
-			.save(ArticleTestFixtureUtils.anyArticle());
+			.save(ArticleFixtureUtils.anyArticle());
 	}
 
 }

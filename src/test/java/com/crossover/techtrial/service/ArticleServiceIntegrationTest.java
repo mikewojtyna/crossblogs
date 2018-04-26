@@ -67,6 +67,22 @@ public class ArticleServiceIntegrationTest
 	}
 
 	@Test
+	public void should_NotUpdate_NonExistentArticle() throws Exception
+	{
+		// given
+		Article updatedArticle = ArticleFixtureUtils.anyArticle();
+		Long nonExistentId = -1L;
+
+		// when
+		boolean updated = articleService.update(nonExistentId,
+			updatedArticle);
+
+		// then
+		assertThat(updated).isFalse();
+		assertThat(findArticle(nonExistentId)).isNotPresent();
+	}
+
+	@Test
 	public void should_ReturnEmptyOptional_When_FindArticleThatDoesntExist()
 		throws Exception
 	{
@@ -93,6 +109,27 @@ public class ArticleServiceIntegrationTest
 		assertThat(matchingArticles).hasSize(1);
 		assertThat(matchingArticles.iterator().next().getTitle())
 			.isEqualTo(title);
+	}
+
+	@Test
+	public void should_UpdateExistingArticle() throws Exception
+	{
+		// given
+		Article updatedArticle = ArticleFixtureUtils
+			.articleWithTitle("Introduction to DDD");
+		// create some existing articles
+		Article tddArticle = createArticleWithTitle("TDD basics");
+		createArticleWithTitle("Kotlin");
+		createArticleWithTitle("Scala examples");
+
+		// when
+		boolean updated = articleService.update(tddArticle.getId(),
+			updatedArticle);
+
+		// then
+		assertThat(updated).isTrue();
+		assertThat(findArticle(tddArticle.getId()).get().getTitle())
+			.isEqualTo("Introduction to DDD");
 	}
 
 	/**

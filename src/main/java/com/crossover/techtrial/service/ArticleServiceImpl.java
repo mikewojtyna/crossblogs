@@ -46,7 +46,24 @@ public class ArticleServiceImpl implements ArticleService
 	@Override
 	public boolean update(Long id, Article article)
 	{
-		throw new UnsupportedOperationException("Not yet implemented");
+		Optional<Article> oldArticle = articleRepository.findById(id);
+		oldArticle.ifPresent(old -> updateOldArticle(old, article));
+		return oldArticle.map(old -> true).orElse(false);
+	}
+
+	/**
+	 * @param oldArticle
+	 * @param updatedArticle
+	 */
+	private void updateOldArticle(Article oldArticle,
+		Article updatedArticle)
+	{
+		oldArticle.setContent(updatedArticle.getContent());
+		oldArticle.setDate(updatedArticle.getDate());
+		oldArticle.setEmail(updatedArticle.getEmail());
+		oldArticle.setPublished(updatedArticle.getPublished());
+		oldArticle.setTitle(updatedArticle.getTitle());
+		articleRepository.save(oldArticle);
 	}
 
 }

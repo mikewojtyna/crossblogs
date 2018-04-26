@@ -28,4 +28,15 @@ public class ArticleFixtureUtils
 		article.setEmail(email);
 		return article;
 	}
+
+	/**
+	 * @param title
+	 * @return
+	 */
+	public static Article articleWithTitle(String title)
+	{
+		Article article = anyArticle();
+		article.setTitle(title);
+		return article;
+	}
 }

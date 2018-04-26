@@ -22,6 +22,7 @@ import com.crossover.techtrial.repository.CommentRepository;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@SuppressWarnings("javadoc")
 public class CommentServiceIntegrationTest
 {
 	@Autowired
@@ -139,8 +140,7 @@ public class CommentServiceIntegrationTest
 	 */
 	private Article createNewArticle()
 	{
-		return articleService
-			.save(ArticleFixtureUtils.anyArticle());
+		return articleService.save(ArticleFixtureUtils.anyArticle());
 	}
 
 }

@@ -21,6 +21,7 @@ import com.crossover.techtrial.repository.ArticleRepository;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@SuppressWarnings("javadoc")
 public class ArticleServiceIntegrationTest
 {
 

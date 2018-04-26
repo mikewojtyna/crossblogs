@@ -24,12 +24,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.crossover.techtrial.model.Article;
-import com.crossover.techtrial.service.ArticleService;
 import com.crossover.techtrial.service.ArticleFixtureUtils;
+import com.crossover.techtrial.service.ArticleService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ArticleControllerTest
+@SuppressWarnings("javadoc")
+public class ArticleControllerIntegrationTest
 {
 
 	@MockBean
@@ -138,7 +139,6 @@ public class ArticleControllerTest
 			.isEqualTo(HttpStatus.NOT_FOUND);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
 	public void should_SearchArticles() throws Exception
 	{

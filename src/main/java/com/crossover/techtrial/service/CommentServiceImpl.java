@@ -49,8 +49,7 @@ public class CommentServiceImpl implements CommentService
 	/*
 	 * Save the default article.
 	 */
-	@Override
-	public Comment save(Comment comment)
+	private Comment save(Comment comment)
 	{
 		return commentRepository.save(comment);
 	}

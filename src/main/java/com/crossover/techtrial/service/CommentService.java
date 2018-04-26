@@ -23,9 +23,4 @@ public interface CommentService
 	 */
 	List<Comment> findAll(Long articleId);
 
-	/*
-	 * Save the default article.
-	 */
-	Comment save(Comment comment);
-
 }

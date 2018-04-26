@@ -63,32 +63,6 @@ public class CommentServiceIntegrationTest
 	}
 
 	@Test
-	public void should_CreateComment_RelatedToArticle() throws Exception
-	{
-		// given
-		Article article = createNewArticle();
-
-		// when
-		Comment savedComment = service.save(commentOfArticle(article));
-
-		// then
-		assertThat(savedComment.getArticle()).isEqualTo(article);
-	}
-
-	@Test
-	public void should_CreateCommentWithoutArticle() throws Exception
-	{
-		// given
-		Comment comment = anyComment();
-
-		// when
-		Comment savedComment = service.save(comment);
-
-		// then
-		assertThat(savedComment).isNotNull();
-	}
-
-	@Test
 	public void should_FindAllComments_Of_Article() throws Exception
 	{
 		// given
@@ -163,20 +137,10 @@ public class CommentServiceIntegrationTest
 	 * @param article
 	 * @return
 	 */
-	private Comment commentOfArticle(Article article)
-	{
-		Comment comment = anyComment();
-		comment.setArticle(article);
-		return comment;
-	}
-
-	/**
-	 * @param article
-	 * @return
-	 */
 	private Comment createCommentForArticle(Article article)
 	{
-		return service.save(CommentFixtureUtils.withArticle(article));
+		return service.addComment(article.getId(),
+			CommentFixtureUtils.anyComment()).get();
 	}
 
 	/**

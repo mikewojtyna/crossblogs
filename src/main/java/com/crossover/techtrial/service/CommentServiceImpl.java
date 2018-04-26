@@ -1,17 +1,41 @@
 package com.crossover.techtrial.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
+import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.model.Comment;
+import com.crossover.techtrial.repository.ArticleRepository;
 import com.crossover.techtrial.repository.CommentRepository;
 
 @Service
 public class CommentServiceImpl implements CommentService
 {
 
-	@Autowired
+	private final ArticleRepository articleRepository;
+
 	CommentRepository commentRepository;
+
+	public CommentServiceImpl(CommentRepository commentRepository,
+		ArticleRepository articleRepository)
+	{
+		this.commentRepository = commentRepository;
+		this.articleRepository = articleRepository;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.crossover.techtrial.service.CommentService#addComment(long, com.crossover.techtrial.model.Comment)
+	 */
+	@Override
+	public Optional<Comment> addComment(long articleId, Comment comment)
+	{
+		Optional<Article> article = articleRepository
+			.findById(articleId);
+
+		article.ifPresent(a -> comment.setArticle(a));
+		return article.map(a -> Optional.of(save(comment)))
+			.orElse(Optional.empty());
+	}
 
 	/*
 	 * Returns all the Comments related to article along with Pagination information.
@@ -19,7 +43,7 @@ public class CommentServiceImpl implements CommentService
 	@Override
 	public List<Comment> findAll(Long articleId)
 	{
-		return commentRepository.findAll();
+		return commentRepository.findByArticleId(articleId);
 	}
 
 	/*

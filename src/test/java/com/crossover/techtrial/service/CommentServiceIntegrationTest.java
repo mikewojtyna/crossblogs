@@ -4,7 +4,9 @@
 package com.crossover.techtrial.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,29 @@ public class CommentServiceIntegrationTest
 	private CommentService service;
 
 	@Test
+	public void should_AddComment_To_ExistingArticle() throws Exception
+	{
+		// given
+		// add some existing articles
+		Article targetArticle = createNewArticle();
+		createNewArticle();
+		createNewArticle();
+		// comment to add
+		Comment comment = CommentFixtureUtils
+			.withMessage("hello, this is a message!");
+
+		// when
+		Comment newComment = service
+			.addComment(targetArticle.getId(), comment).get();
+
+		// then
+		assertThat(newComment.getMessage())
+			.isEqualTo(comment.getMessage());
+		assertThat(findComments(targetArticle.getId()))
+			.containsOnly(newComment);
+	}
+
+	@Test
 	public void should_CreateComment_RelatedToArticle() throws Exception
 	{
 		// given
@@ -67,23 +92,45 @@ public class CommentServiceIntegrationTest
 	public void should_FindAllComments_Of_Article() throws Exception
 	{
 		// given
-		// create first article with some comments
-		Article firstArticle = createNewArticle();
-		Long firstArticleId = firstArticle.getId();
+		// create requested article with some comments
+		Article requestedArticle = createNewArticle();
+		Long requestedArticleId = requestedArticle.getId();
 		// there are 3 comments for first article
-		Comment comment0 = createCommentForArticle(firstArticleId);
-		Comment comment1 = createCommentForArticle(firstArticleId);
-		Comment comment2 = createCommentForArticle(firstArticleId);
-		// lets add another irrelevant article
-		createNewArticle();
+		Comment comment0 = createCommentForArticle(requestedArticle);
+		Comment comment1 = createCommentForArticle(requestedArticle);
+		Comment comment2 = createCommentForArticle(requestedArticle);
+		// lets add another irrelevant article and comments
+		Article otherArticle = createNewArticle();
+		createCommentForArticle(otherArticle);
+		createCommentForArticle(otherArticle);
 
 		// when
 		List<Comment> commentsOfFirstArticle = service
-			.findAll(firstArticleId);
+			.findAll(requestedArticleId);
 
 		// then
 		assertThat(commentsOfFirstArticle).containsOnly(comment0,
 			comment1, comment2);
+	}
+
+	@Test
+	public void should_NotAddComment_To_NonExistentArticle()
+		throws Exception
+	{
+		// given
+		// add some articles
+		createNewArticle();
+		createNewArticle();
+		Comment comment = anyComment();
+		long nonExistendArticleId = nonExistentArticleId();
+
+		// when
+		Optional<Comment> addedComment = service
+			.addComment(nonExistendArticleId, comment);
+
+		// then
+		assertThat(addedComment).isNotPresent();
+		assertThat(findComments(nonExistendArticleId)).isEmpty();
 	}
 
 	/**
@@ -100,9 +147,7 @@ public class CommentServiceIntegrationTest
 	 */
 	private Comment anyComment()
 	{
-		Comment comment = new Comment();
-		comment.setEmail("test@email.com");
-		return comment;
+		return CommentFixtureUtils.anyComment();
 	}
 
 	/**
@@ -126,12 +171,12 @@ public class CommentServiceIntegrationTest
 	}
 
 	/**
-	 * @param articleId
+	 * @param article
 	 * @return
 	 */
-	private Comment createCommentForArticle(Long articleId)
+	private Comment createCommentForArticle(Article article)
 	{
-		return service.save(anyComment());
+		return service.save(CommentFixtureUtils.withArticle(article));
 	}
 
 	/**
@@ -141,6 +186,23 @@ public class CommentServiceIntegrationTest
 	private Article createNewArticle()
 	{
 		return articleService.save(ArticleFixtureUtils.anyArticle());
+	}
+
+	/**
+	 * @param articleId
+	 * @return
+	 */
+	private Collection<Comment> findComments(Long articleId)
+	{
+		return service.findAll(articleId);
+	}
+
+	/**
+	 * @return
+	 */
+	private long nonExistentArticleId()
+	{
+		return -777L;
 	}
 
 }

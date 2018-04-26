@@ -3,6 +3,7 @@
  */
 package com.crossover.techtrial.service;
 
+import java.util.Random;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.model.Comment;
 
@@ -25,6 +26,16 @@ public class CommentFixtureUtils
 	}
 
 	/**
+	 * @return
+	 */
+	public static Comment randomComment()
+	{
+		Comment comment = anyComment();
+		comment.setId(randomId());
+		return comment;
+	}
+
+	/**
 	 * @param article
 	 * @return
 	 */
@@ -32,6 +43,17 @@ public class CommentFixtureUtils
 	{
 		Comment comment = anyComment();
 		comment.setArticle(article);
+		return comment;
+	}
+
+	/**
+	 * @param email
+	 * @return
+	 */
+	public static Comment withEmail(String email)
+	{
+		Comment comment = anyComment();
+		comment.setEmail(email);
 		return comment;
 	}
 
@@ -44,6 +66,14 @@ public class CommentFixtureUtils
 		Comment comment = anyComment();
 		comment.setMessage(message);
 		return comment;
+	}
+
+	/**
+	 * @return
+	 */
+	private static Long randomId()
+	{
+		return new Random().nextLong();
 	}
 
 }

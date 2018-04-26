@@ -27,10 +27,9 @@ public class CommentController
 		@PathVariable(value = "article-id") Long articleId,
 		@RequestBody Comment comment)
 	{
-		comment.setArticle(
-			articleService.findById(articleId).orElse(null));
-		return new ResponseEntity<>(commentService.save(comment),
-			HttpStatus.CREATED);
+		return commentService.addComment(articleId, comment)
+			.map(c -> new ResponseEntity<>(c, HttpStatus.CREATED))
+			.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
 
 	@GetMapping(path = "articles/{article-id}/comments")

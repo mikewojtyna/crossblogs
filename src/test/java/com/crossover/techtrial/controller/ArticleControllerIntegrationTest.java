@@ -17,10 +17,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.crossover.techtrial.model.Article;
@@ -203,8 +201,6 @@ public class ArticleControllerIntegrationTest
 
 	private HttpEntity<Object> getHttpEntity(Object body)
 	{
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return new HttpEntity<Object>(body, headers);
+		return ControllerTestUtils.getHttpEntity(body);
 	}
 }

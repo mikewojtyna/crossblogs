@@ -14,7 +14,7 @@ public class CommentServiceImpl implements CommentService
 
 	private final ArticleRepository articleRepository;
 
-	CommentRepository commentRepository;
+	private final CommentRepository commentRepository;
 
 	public CommentServiceImpl(CommentRepository commentRepository,
 		ArticleRepository articleRepository)

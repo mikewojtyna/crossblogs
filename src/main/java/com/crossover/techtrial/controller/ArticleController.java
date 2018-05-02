@@ -1,7 +1,8 @@
 package com.crossover.techtrial.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,11 +52,22 @@ public class ArticleController
 	 * Search endpoint is used in autocomplete and return only top 10 results. Therefore no need for
 	 * pagination.
 	 */
+
+	/**
+	 * Filters articles by title.
+	 *
+	 * @param text
+	 *                a title text
+	 * @param pageRequest
+	 *                a page request object to determine the page result
+	 * @return the response entity with 200 status and requested page body
+	 */
 	@GetMapping(path = "articles/search")
-	public ResponseEntity<List<Article>> searchArticles(
-		@RequestParam(value = "text") String text)
+	public ResponseEntity<Page<Article>> searchArticles(
+		@RequestParam(value = "text") String text, Pageable pageRequest)
 	{
-		return new ResponseEntity<>(articleService.search(text),
+		return new ResponseEntity<>(
+			articleService.search(text, pageRequest),
 			HttpStatus.OK);
 	}
 

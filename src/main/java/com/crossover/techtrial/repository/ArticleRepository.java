@@ -1,6 +1,7 @@
 package com.crossover.techtrial.repository;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.crossover.techtrial.model.Article;
@@ -10,6 +11,7 @@ public interface ArticleRepository
 	extends PagingAndSortingRepository<Article, Long>
 {
 
-	List<Article> findByTitleContainingIgnoreCase(String title);
+	Page<Article> findByTitleContainingIgnoreCase(String title,
+		Pageable pageRequest);
 
 }

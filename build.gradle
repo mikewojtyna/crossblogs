@@ -79,6 +79,7 @@ dependencies {
 	compile('org.liquibase:liquibase-core')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'com.revinate:assertj-json:1.1.0'
 }
 
 task copyDockerFiles(type: Copy) {

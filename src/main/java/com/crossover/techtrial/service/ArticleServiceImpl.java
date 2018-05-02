@@ -1,8 +1,9 @@
 package com.crossover.techtrial.service;
 
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.repository.ArticleRepository;
@@ -33,10 +34,10 @@ public class ArticleServiceImpl implements ArticleService
 	}
 
 	@Override
-	public List<Article> search(String search)
+	public Page<Article> search(String search, Pageable pageRequest)
 	{
-		return articleRepository
-			.findByTitleContainingIgnoreCase(search);
+		return articleRepository.findByTitleContainingIgnoreCase(search,
+			pageRequest);
 	}
 
 	/* (non-Javadoc)

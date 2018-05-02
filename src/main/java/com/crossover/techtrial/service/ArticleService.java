@@ -1,7 +1,8 @@
 package com.crossover.techtrial.service;
 
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.crossover.techtrial.model.Article;
 
 /*
@@ -27,10 +28,19 @@ public interface ArticleService
 	 */
 	Article save(Article article);
 
-	/*
-	 * Search Articles Table matching the title and return result with pagination.
+	/**
+	 * Search Articles Table matching the title and return result with
+	 * pagination.
+	 *
+	 * @param title
+	 *                A string that needs to be contained within article's
+	 *                title. Case is ignored.
+	 * @param pageRequest
+	 *                a page request object containing all information
+	 *                required to obtain the specific result page
+	 * @return the requested page containing articles filtered by title
 	 */
-	List<Article> search(String title);
+	Page<Article> search(String title, Pageable pageRequest);
 
 	/**
 	 * Updates existing article entity.

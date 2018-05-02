@@ -1,4 +1,17 @@
-Challenge Statement
+## Things changed
+
+1. Improved general design and quality
+2. Raised coverage to 75%
+3. Added a lot of missing tests
+4. Removed logic from controllers
+5. Improved articles scalability by adding pagination support and EventPublisher (to easily scale with multiple nodes using separate read model, e.g. NoSql)
+6. Added gradle docker plugin to automatically compose mysql container when running tests (so no need to start manually)
+7. Added separate properties for production and test environments
+8. Added health checks for mysql when running Docker compose
+9. Fixed bugs 
+10. Improved article search performance by using simpler repository method and creating db index for title property in new liquibase changeset 
+
+## Challenge Statement
 
 Cross-blogs is a backend blogging application written by a startup company called WritingForAll. It allows users to create / update / delete their articles, accepting comments for each article.
 

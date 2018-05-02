@@ -1,24 +1,36 @@
 package com.crossover.techtrial.service;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.crossover.techtrial.model.Article;
 import com.crossover.techtrial.repository.ArticleRepository;
+import com.crossover.techtrial.service.ArticleEvent.ArticleOperation;
 
 @Service
 public class ArticleServiceImpl implements ArticleService
 {
 
-	@Autowired
-	ArticleRepository articleRepository;
+	private final ArticleRepository articleRepository;
+
+	private final EventPublisher<ArticleEvent> eventPublisher;
+
+	public ArticleServiceImpl(ArticleRepository articleRepository,
+		EventPublisher<ArticleEvent> eventPublisher)
+	{
+		this.articleRepository = articleRepository;
+		this.eventPublisher = eventPublisher;
+	}
 
 	@Override
 	public void delete(Long id)
 	{
 		articleRepository.deleteById(id);
+		// publish an event, so it can be later consumed by other nodes,
+		// e.g. using separate NoSql read model
+		eventPublisher.publishEvent(
+			new ArticleEvent(id, ArticleOperation.DELETED));
 	}
 
 	@Override
@@ -30,7 +42,12 @@ public class ArticleServiceImpl implements ArticleService
 	@Override
 	public Article save(Article article)
 	{
-		return articleRepository.save(article);
+		Article newArticle = articleRepository.save(article);
+		// publish an event, so it can be later consumed by other nodes,
+		// e.g. using separate NoSql read model
+		eventPublisher.publishEvent(new ArticleEvent(newArticle.getId(),
+			ArticleOperation.CREATED));
+		return newArticle;
 	}
 
 	@Override
@@ -48,6 +65,10 @@ public class ArticleServiceImpl implements ArticleService
 	{
 		Optional<Article> oldArticle = articleRepository.findById(id);
 		oldArticle.ifPresent(old -> updateOldArticle(old, article));
+		// publish an event, so it can be later consumed by other nodes,
+		// e.g. using separate NoSql read model
+		eventPublisher.publishEvent(
+			new ArticleEvent(id, ArticleOperation.UPDATED));
 		return oldArticle.map(old -> true).orElse(false);
 	}
 
